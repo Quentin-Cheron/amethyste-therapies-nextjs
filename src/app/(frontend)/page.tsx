@@ -1,59 +1,31 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
-import { getPayload } from 'payload'
 import React from 'react'
-import { fileURLToPath } from 'url'
+import '@/app/globals.css'
+import Hero from '@/components/hero'
+import Features from '@/components/feature'
+import { CarouselSize } from '@/components/carousel'
+import { Metadata } from 'next'
+import Accompagnement from '@/components/accompagnement'
 
-import config from '@/payload.config'
-import './styles.css'
+export const metadata: Metadata = {
+  title: 'Psychothérapeute à Salon-de-Provence | EMDR & TCC | Cabinet de Psychothérapie',
+  description:
+    'Psychothérapeute spécialisée en EMDR, TCC et hypnothérapie à Salon-de-Provence. Accompagnement personnalisé pour anxiété, dépression, traumatismes. Prenez rendez-vous.',
+  keywords:
+    'psychothérapeute Salon-de-Provence, EMDR, TCC, thérapie cognitive comportementale, hypnothérapie, anxiété, dépression, traumatisme, thérapie, bien-être mental',
+}
 
 export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
-
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
+    <div>
+      <Hero />
+      <Features />
+      <Accompagnement />
+      <section className="py-16">
+        <h2 className="text-3xl font-bold text-center mb-12">
+          Découvrez nos Services Thérapeutiques
+        </h2>
+        <CarouselSize />
+      </section>
     </div>
   )
 }

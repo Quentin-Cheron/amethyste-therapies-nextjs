@@ -1,5 +1,9 @@
 import React from 'react'
-import './styles.css'
+import '@/app/globals.css'
+import Header from '@/components/layout/header'
+import { Toaster } from 'sonner'
+import Footer from '@/components/Footer'
+import Info from '@/components/info'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -12,7 +16,13 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <main>{children}</main>
+        <Header />
+        <main className="max-w-7xl mx-auto mt-29">
+          {children}
+          <Info />
+        </main>
+        <Footer />
+        <Toaster />
       </body>
     </html>
   )
