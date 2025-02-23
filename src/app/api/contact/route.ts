@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
 
     // Utiliser les données reçues pour générer l'email
-    const emailContent = EmailTemplate(body)
+    const emailContent = await EmailTemplate(body)
 
     const { data, error } = await resend.emails.send({
       from: 'Acme <onboarding@resend.dev>',
