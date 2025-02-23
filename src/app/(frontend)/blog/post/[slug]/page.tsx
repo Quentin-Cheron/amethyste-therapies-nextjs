@@ -19,7 +19,7 @@ export default async function BlogPage(props: { params: Promise<{ slug: string }
 
   console.log(post)
 
-  const { name, summary, content, author, category, media } = post.data as PostProps
+  const { content, media } = post.data as PostProps
 
   return (
     <div className="overflow-hidden bg-white">
