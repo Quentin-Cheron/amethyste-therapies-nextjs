@@ -20,7 +20,7 @@ const navigation = {
       name: 'Facebook',
       href: 'https://www.facebook.com/amethyste.therapies',
       icon: (props = {}) => (
-        <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+        <svg fill="currentColor" viewBox="0 0 24 24" {...props} className="size-6">
           <path
             color="#0765FF"
             fillRule="evenodd"
@@ -104,7 +104,7 @@ export default function Example() {
             {navigation.social.map((item) => (
               <Link key={item.name} href={item.href} className="text-gray-600 hover:text-gray-800">
                 <span className="sr-only">{item.name}</span>
-                <item.icon aria-hidden="true" className="size-6" />
+                <item.icon aria-hidden="true" />
               </Link>
             ))}
           </div>
