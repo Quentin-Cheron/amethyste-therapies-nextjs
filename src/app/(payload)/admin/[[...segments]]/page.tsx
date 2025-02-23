@@ -16,15 +16,15 @@ type Args = {
 }
 
 export const generateMetadata = async (props: Args): Promise<Metadata> => {
-  const searchParams = await props.searchParams;
-  const params = await props.params;
-  return generatePageMetadata({ config, params, searchParams });
+  const searchParams = await props.searchParams
+  const params = await props.params
+  return generatePageMetadata({ config, params, searchParams } as any)
 }
 
 const Page = async (props: Args) => {
-  const searchParams = await props.searchParams;
-  const params = await props.params;
-  return RootPage({ config, params, searchParams, importMap });
+  const searchParams = await props.searchParams
+  const params = await props.params
+  return RootPage({ config, params, searchParams, importMap } as any)
 }
 
 export default Page
