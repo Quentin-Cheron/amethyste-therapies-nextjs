@@ -27,6 +27,8 @@ export default function Card({ item, type }: CardProps) {
       url = `/tarifs/${slug}`
       break
   }
+
+  console.log(item.media.filename)
   return (
     <article
       key={item.id}

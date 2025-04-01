@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import * as motion from 'motion/react-client'
 
 const formations = [
   {
@@ -170,9 +171,15 @@ export default function Example() {
           <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-12">
             Mon Parcours Professionnel
           </h2>
-          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:max-w-none lg:grid-cols-4">
+
+          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
             {formations.map((item) => (
-              <div key={item.name} className="border border-gray-200 p-6 rounded-lg shadow-sm">
+              <motion.div
+                key={item.name}
+                transition={{ type: 'spring', stiffness: 200 }}
+                whileHover={{ scale: 1.05 }}
+                className="border border-gray-200 p-6 rounded-lg shadow-sm"
+              >
                 <time
                   dateTime={item.dateTime}
                   className="flex items-center text-sm font-semibold text-primary"
@@ -186,7 +193,7 @@ export default function Example() {
                   {item.name}
                 </p>
                 <p className="mt-1 text-base text-gray-600">{item.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

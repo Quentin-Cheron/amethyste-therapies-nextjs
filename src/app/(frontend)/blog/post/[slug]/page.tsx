@@ -1,6 +1,7 @@
 import { getPostBySlug } from '@/actions/blog'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Image from 'next/image'
+import style from './post.module.scss'
 
 type PostProps = {
   id: string
@@ -8,7 +9,7 @@ type PostProps = {
   summary: string
   content: any
   author: string
-  category: string
+  category: { name: string }
   media: { filename: string; width: number; height: number }
 }
 
@@ -17,9 +18,7 @@ export default async function BlogPage(props: { params: Promise<{ slug: string }
   const slugParam = await params.slug
   const post = await getPostBySlug(slugParam)
 
-  console.log(post)
-
-  const { content, media } = post.data as PostProps
+  const { content, media, category } = post.data as PostProps
 
   return (
     <div className="overflow-hidden bg-white">
@@ -27,7 +26,9 @@ export default async function BlogPage(props: { params: Promise<{ slug: string }
         <div className="absolute top-0 bottom-0 left-3/4 hidden w-screen bg-gray-50 lg:block" />
         <div className="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8">
           <div>
-            <h2 className="text-lg font-semibold text-primary">Case Study</h2>
+            <h2 className="text-lg font-semibold text-primary">
+              {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+            </h2>
             <h3 className="mt-2 text-3xl/8 font-bold tracking-tight text-gray-900 sm:text-4xl">
               Meet Whitney
             </h3>
@@ -78,7 +79,7 @@ export default async function BlogPage(props: { params: Promise<{ slug: string }
           </div>
           <div className="mt-8 lg:mt-0">
             <div className="mx-auto text-base/7 text-gray-500">
-              <RichText data={content} />
+              <RichText data={content} className={style.richText} />
             </div>
           </div>
         </div>

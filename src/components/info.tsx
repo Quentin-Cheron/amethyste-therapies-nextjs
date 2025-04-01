@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Info() {
   return (
-    <div className="border-y bg-white mx-auto max-w-7xl px-6 py-12 lg:px-8 md:flex md:items-center md:justify-between">
+    <div className="border-y bg-white mx-auto mt-10 max-w-7xl px-6 py-12 lg:px-8 md:flex md:items-center md:justify-between">
       <div data-aos="fade-right" className="aos-init aos-animate md:order-1 md:mt-0">
         <p className="text-center text-sm leading-5 text-gray-500 mb-3 sm:mb-0">
           Prenez rendez-vous sur

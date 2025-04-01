@@ -3,6 +3,10 @@ import slugify from 'slugify'
 
 export const CategoryTarif: CollectionConfig = {
   slug: 'category-tarif',
+  labels: {
+    plural: 'Catégorie des tarifs',
+    singular: 'Categorie',
+  },
   admin: {
     useAsTitle: 'name',
   },

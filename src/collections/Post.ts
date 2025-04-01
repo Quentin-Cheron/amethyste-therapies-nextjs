@@ -46,7 +46,7 @@ export const Post: CollectionConfig = {
     {
       name: 'category',
       type: 'relationship',
-      relationTo: 'category',
+      relationTo: 'category-post',
       required: true,
     },
     {

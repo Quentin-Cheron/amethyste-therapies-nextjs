@@ -1,6 +1,7 @@
 import { getServiceBySlug } from '@/actions/services'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Image from 'next/image'
+import style from './service.module.scss'
 
 type ServiceProps = {
   id: number
@@ -10,7 +11,7 @@ type ServiceProps = {
 }
 
 export default async function Page(props: { params: Promise<{ slug: string }> }) {
-  const params = await props.params;
+  const params = await props.params
   const slugParam = await params.slug
   const service = await getServiceBySlug(slugParam)
 
@@ -19,7 +20,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
   return (
     <div className="overflow-hidden bg-white">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="absolute top-0 bottom-0 left-3/4 hidden w-screen bg-gray-50 lg:block" />
+        <div className="absolute top-0 bottom-0 left-3/4 hidden w-screen h-96 bg-gray-50 lg:block" />
         <div className="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8">
           <h1 className="mt-2 text-3xl/8 font-bold tracking-tight text-gray-900 sm:text-4xl">
             {name}
@@ -70,7 +71,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
           </div>
           <div className="mt-8 lg:mt-0">
             <div className="mx-auto text-base/7 text-gray-500">
-              <RichText data={content} />
+              <RichText data={content} className={style.richText} />
             </div>
           </div>
         </div>

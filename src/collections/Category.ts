@@ -1,7 +1,11 @@
 import type { CollectionConfig } from 'payload'
 
-export const Category: CollectionConfig = {
-  slug: 'category',
+export const CategoryPost: CollectionConfig = {
+  slug: 'category-post',
+  labels: {
+    plural: 'Catégorie des posts',
+    singular: 'Categorie',
+  },
   admin: {
     useAsTitle: 'name',
   },

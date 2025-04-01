@@ -67,7 +67,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    category: Category;
+    'category-post': CategoryPost;
     post: Post;
     service: Service;
     tarif: Tarif;
@@ -80,7 +80,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    category: CategorySelect<false> | CategorySelect<true>;
+    'category-post': CategoryPostSelect<false> | CategoryPostSelect<true>;
     post: PostSelect<false> | PostSelect<true>;
     service: ServiceSelect<false> | ServiceSelect<true>;
     tarif: TarifSelect<false> | TarifSelect<true>;
@@ -159,9 +159,9 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "category".
+ * via the `definition` "category-post".
  */
-export interface Category {
+export interface CategoryPost {
   id: number;
   name: string;
   description: string;
@@ -194,7 +194,7 @@ export interface Post {
     [k: string]: unknown;
   };
   author: number | User;
-  category: number | Category;
+  category: number | CategoryPost;
   media: number | Media;
   updatedAt: string;
   createdAt: string;
@@ -270,8 +270,8 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'category';
-        value: number | Category;
+        relationTo: 'category-post';
+        value: number | CategoryPost;
       } | null)
     | ({
         relationTo: 'post';
@@ -366,9 +366,9 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "category_select".
+ * via the `definition` "category-post_select".
  */
-export interface CategorySelect<T extends boolean = true> {
+export interface CategoryPostSelect<T extends boolean = true> {
   name?: T;
   description?: T;
   media?: T;

@@ -1,5 +1,3 @@
-'use client'
-
 import { Suspense } from 'react'
 import Card from './card'
 
@@ -15,12 +13,7 @@ export default function CardSection({ items, type }: { items: CardSectionProps; 
   return (
     <section className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 mt-10">
       {items.map((item) => (
-        <Suspense
-          key={item.id}
-          fallback={<div className="text-center text-gray-600">Chargement...</div>}
-        >
-          <Card item={item} type={type} />
-        </Suspense>
+        <Card key={item.id} item={item} type={type} />
       ))}
     </section>
   )

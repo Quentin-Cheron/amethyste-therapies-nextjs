@@ -39,7 +39,6 @@ export const getPostBySlug = async (slug: string) => {
         slug: { equals: slug },
       },
     })
-    console.log(slug)
     if (!data.docs) {
       return { success: false, data: 'No data' }
     }
@@ -53,7 +52,7 @@ export const getPostBySlug = async (slug: string) => {
 export const getAllCategories = async () => {
   try {
     const data = await payload.find({
-      collection: 'category',
+      collection: 'category-post',
       sort: 'ASC',
       select: {
         id: true,
