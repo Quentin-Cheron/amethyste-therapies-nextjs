@@ -14,6 +14,8 @@ type CardProps = {
 export default async function Page() {
   const services = await getAllServices()
   const data = services?.data as CardProps[]
+
+  console.log(data)
   return (
     <div className="max-w-6xl mx-auto px-4 pb-8">
       <h1 className="text-center text-4xl font-bold mb-12 text-gray-800">Les Services proposés</h1>

@@ -109,9 +109,11 @@ export default function Page() {
                   <span className="sr-only">Adresse</span>
                 </dt>
                 <dd>
-                  8 avenue Frédéric Mistrals
+                  Centre Médical du Vert Bocage
                   <br />
-                  13330 Pélissanne
+                  248 avenue de Wertheim
+                  <br />
+                  13300 Salon-de-Provence
                 </dd>
               </div>
               <div className="flex gap-x-4">
@@ -120,7 +122,7 @@ export default function Page() {
                 </dt>
                 <dd>
                   <a href="tel:+33 6 24 66 30" className="hover:text-gray-900">
-                    +33 6 24 66 30
+                    +33 6 27 34 66 30
                   </a>
                 </dd>
               </div>
@@ -130,7 +132,7 @@ export default function Page() {
                 </dt>
                 <dd>
                   <a href="mailto:hello@example.com" className="hover:text-gray-900">
-                    amethyste@gmail.com
+                    amethyste.therapies@gmail.com
                   </a>
                 </dd>
               </div>

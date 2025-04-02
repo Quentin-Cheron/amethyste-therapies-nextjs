@@ -1,4 +1,5 @@
-import { Button } from './ui/button'
+import { cn } from '@/lib/utils'
+import { Button, buttonVariants } from './ui/button'
 import * as motion from 'motion/react-client'
 
 export default function Hero() {
@@ -36,9 +37,14 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
           className="mt-8"
         >
-          <Button aria-label="Prendre rendez-vous pour une consultation">
+          <a
+            href="https://www.resalib.fr/praticien/43834-stephanie-morier-praticien-emdr-salon-de-provence"
+            target="_blank"
+            aria-label="Prendre rendez-vous pour une consultation"
+            className={cn(buttonVariants(), 'cursor-pointer')}
+          >
             Prendre Rendez-vous
-          </Button>
+          </a>
         </motion.div>
       </motion.div>
     </div>
