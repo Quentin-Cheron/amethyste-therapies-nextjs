@@ -1,3 +1,4 @@
+import { getImageUrl } from '@/lib/image'
 import Link from 'next/link'
 import slugify from 'slugify'
 
@@ -7,7 +8,7 @@ type CardProps = {
     slug?: string
     name?: string
     description?: string
-    media: { filename: string }
+    media: { filename: string; imageId: string }
   }
   type: string
 }
@@ -28,12 +29,11 @@ export default function Card({ item, type }: CardProps) {
       break
   }
 
-  console.log(item.media.filename)
   return (
     <article
       key={item.id}
       className="cursor-pointer relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-48 group h-full bg-center bg-cover bg-no-repeat aos-init aos-animate"
-      style={{ backgroundImage: `url(uploads/${item.media.filename})` }}
+      style={{ backgroundImage: `url(${getImageUrl(item.media.imageId)})` }}
       data-aos="fade-up"
     >
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>

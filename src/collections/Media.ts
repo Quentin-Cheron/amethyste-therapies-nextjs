@@ -1,6 +1,5 @@
 import FormData from 'form-data'
 import type { CollectionConfig } from 'payload'
-import path from 'path'
 import axios from 'axios'
 
 export const Media: CollectionConfig = {
@@ -14,14 +13,15 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    { name: 'imageId', type: 'text', admin: { readOnly: true } },
   ],
   upload: {
     cacheTags: false,
   },
   hooks: {
     afterChange: [
-      async ({ doc, req }) => {
-        if (doc.cloudflareId || !doc.filename) {
+      async ({ doc, req, operation }) => {
+        if (!doc.filename || operation !== 'create') {
           return doc
         }
 
@@ -30,8 +30,7 @@ export const Media: CollectionConfig = {
 
           const form = new FormData()
 
-          const fileData = await req.file?.data
-
+          const fileData = req.file?.data
           if (!fileData) {
             console.error('No file data found')
             return doc
@@ -53,7 +52,20 @@ export const Media: CollectionConfig = {
             },
           )
 
-          console.log(response.data)
+          const imageId = response.data?.result?.id
+
+          if (!imageId) {
+            console.error('No image ID returned from Cloudflare')
+            return doc
+          }
+
+          req.payload.update({
+            collection: 'media',
+            id: doc.id,
+            data: { imageId },
+          })
+
+          console.log('Cloudflare image ID set:', imageId)
 
           return doc
         } catch (error) {
