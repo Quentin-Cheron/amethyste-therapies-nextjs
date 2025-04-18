@@ -5,7 +5,6 @@ export const GET = async (req: NextRequest) => {
   const nextUrl = req.nextUrl
   const imageId = nextUrl.searchParams.get('imageId') as string
 
-  console.log('imageId', imageId)
   try {
     const response = await axios.get(
       `https://api.cloudflare.com/client/v4/accounts/2a2c02516e07193e154bb45b8b72963a/images/v1/${imageId}`,
@@ -15,9 +14,18 @@ export const GET = async (req: NextRequest) => {
         },
       },
     )
-    return NextResponse.json(response.data.result.variants[0])
+
+    if (response.data.result && response.data.result.variants) {
+      return NextResponse.json(response.data.result.variants[0])
+    } else {
+      console.error('Image ou variante non trouvée')
+      return NextResponse.json({ error: 'Image not found' }, { status: 404 })
+    }
   } catch (error) {
     console.error("Erreur lors de la récupération de l'image:", error)
-    return null
+    return NextResponse.json(
+      { error: "Erreur lors de la récupération de l'image" },
+      { status: 500 },
+    )
   }
 }
