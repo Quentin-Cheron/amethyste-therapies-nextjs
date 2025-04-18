@@ -15,7 +15,7 @@ type CardSectionProps = {
   name: string
   slug: string
   category: { name: string }
-  media: { filename: string }
+  media: { filename: string; imageId: string }
 }
 
 export default function InitFilter() {
