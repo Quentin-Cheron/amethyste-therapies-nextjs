@@ -16,7 +16,7 @@ type CardSectionProps = {
   name: string
   slug: string
   description?: string
-  media: { filename: string }
+  media: { filename: string; imageId: string }
 }
 
 export async function CarouselSize() {
