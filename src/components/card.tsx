@@ -48,7 +48,6 @@ export default function Card({ item, type }: CardProps) {
       fetchImageUrl()
     }
   }, [item.media.imageId])
-
   return (
     <article
       key={item.id}
@@ -56,6 +55,7 @@ export default function Card({ item, type }: CardProps) {
       style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : undefined }}
       data-aos="fade-up"
     >
+      {imageUrl && <Image src={imageUrl} alt={item.name || ''} width={1000} height={1000} />}
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
       <h3 className="h-[50px] text-lg font-semibold leading-6 text-white line-clamp-2">
         {item.name}

@@ -41,11 +41,13 @@ export const Media: CollectionConfig = {
             contentType: doc.mimeType || 'image/jpeg',
           })
 
-          const response = await axios.post('/api/cloudflare', formData, {
+          const response = await axios.post('http://localhost:3000/api/cloudflare', formData, {
             headers: {
               ...formData.getHeaders(),
             },
           })
+
+          console.log('response', response)
 
           const imageId = response.data?.result?.id
 
@@ -54,7 +56,7 @@ export const Media: CollectionConfig = {
             return doc
           }
 
-          await req.payload.update({
+          req.payload.update({
             collection: 'media',
             id: doc.id,
             data: { imageId },
