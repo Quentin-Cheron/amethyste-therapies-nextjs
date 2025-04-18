@@ -1,4 +1,7 @@
-import { getImageUrl } from '@/lib/image'
+'use client'
+
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import slugify from 'slugify'
 
@@ -14,6 +17,7 @@ type CardProps = {
 }
 
 export default function Card({ item, type }: CardProps) {
+  const [imageUrl, setImageUrl] = useState('')
   const slug = slugify((item.slug || item.name) as string, { lower: true })
   let url = ''
 
@@ -29,11 +33,27 @@ export default function Card({ item, type }: CardProps) {
       break
   }
 
+  useEffect(() => {
+    const fetchImageUrl = async () => {
+      try {
+        const response = await fetch(`/api/cloudflare?imageId=${item.media.imageId}`)
+        const data = await response.json()
+        setImageUrl(data)
+      } catch (error) {
+        console.error('Error fetching image URL:', error)
+      }
+    }
+
+    if (item.media.imageId) {
+      fetchImageUrl()
+    }
+  }, [item.media.imageId])
+
   return (
     <article
       key={item.id}
       className="cursor-pointer relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-48 group h-full bg-center bg-cover bg-no-repeat aos-init aos-animate"
-      style={{ backgroundImage: `url(${getImageUrl(item.media.imageId)})` }}
+      style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : undefined }}
       data-aos="fade-up"
     >
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>

@@ -28,7 +28,7 @@ export const Media: CollectionConfig = {
         try {
           console.log('Starting Cloudflare upload for:', doc.filename)
 
-          const form = new FormData()
+          const formData = new FormData()
 
           const fileData = req.file?.data
           if (!fileData) {
@@ -36,21 +36,16 @@ export const Media: CollectionConfig = {
             return doc
           }
 
-          form.append('file', Buffer.from(fileData), {
+          formData.append('file', Buffer.from(fileData), {
             filename: doc.filename,
             contentType: doc.mimeType || 'image/jpeg',
           })
 
-          const response = await axios.post(
-            'https://api.cloudflare.com/client/v4/accounts/2a2c02516e07193e154bb45b8b72963a/images/v1',
-            form,
-            {
-              headers: {
-                Authorization: `Bearer ${process.env.CLOUDFLARE_API_KEY}`,
-                ...form.getHeaders(),
-              },
+          const response = await axios.post('/api/cloudflare', formData, {
+            headers: {
+              ...formData.getHeaders(),
             },
-          )
+          })
 
           const imageId = response.data?.result?.id
 
@@ -59,7 +54,7 @@ export const Media: CollectionConfig = {
             return doc
           }
 
-          req.payload.update({
+          await req.payload.update({
             collection: 'media',
             id: doc.id,
             data: { imageId },
