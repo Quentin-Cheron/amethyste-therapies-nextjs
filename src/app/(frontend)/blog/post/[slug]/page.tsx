@@ -1,4 +1,4 @@
-import { getPostBySlug } from '@/actions/blog'
+import { getAllPosts, getPostBySlug } from '@/actions/blog'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Image from 'next/image'
 import style from './post.module.scss'
@@ -12,6 +12,20 @@ type PostProps = {
   category: { name: string }
   media: { filename: string; width: number; height: number }
 }
+
+type BlogPost = {
+  slug: string
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  console.log(posts)
+  return (posts.data as BlogPost[]).map((post) => ({
+    slug: post.slug,
+  }))
+}
+
+export const dynamic = 'force-static'
 
 export default async function BlogPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params
