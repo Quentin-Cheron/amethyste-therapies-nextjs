@@ -8,7 +8,7 @@ type CardProps = {
   slug?: string
   name?: string
   description?: string
-  media: { filename: string }
+  media: { filename: string; imageId: string }
 }
 
 export default async function Page() {
